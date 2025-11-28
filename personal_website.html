@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md. Sabiruzzaman | Mobile App Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Fonts: Space Grotesk (Headings) & Mulish (Body/UI) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Official Android Brand Colors
+                        android: {
+                            green: '#3DDC84', // The Robot (Accent)
+                            navy: '#073042',  // Official Dark Background
+                            navyLight: '#0B3D52', // Lighter Navy (Cards)
+                            blue: '#4285F4', // Google Blue
+                        },
+                        dark: {
+                            bg: '#050505',
+                            card: '#121212',
+                            border: '#333333',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Mulish', 'sans-serif'], // Used for Body, Menus, Buttons
+                        heading: ['Space Grotesk', 'sans-serif'], // Used for Headings ONLY
+                    },
+                    animation: {
+                        'scroll': 'scroll 40s linear infinite',
+                        'typewriter': 'typewriter 4s steps(40) 1s 1 normal both, blinkTextCursor 500ms steps(40) infinite normal',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        scroll: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        typewriter: {
+                            'from': { width: '0' },
+                            'to': { width: '100%' }
+                        },
+                        blinkTextCursor: {
+                            'from': { borderRightColor: '#3DDC84' },
+                            'to': { borderRightColor: 'transparent' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Mulish', sans-serif;
+            transition: color 0.3s ease;
+            min-height: 100vh;
+            /* Unified Gradient Background - Fixed */
+            background: linear-gradient(135deg, #073042 0%, #020617 50%, #0B3D52 100%);
+            background-attachment: fixed;
+            color: #FFFFFF;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -0.03em; /* Tight spacing for that "Tech" look */
+        }
+
+        /* Scrollbar Dark */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #0B3D52; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3DDC84; }
+
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Modern Glass Card */
+        .glass-card {
+            background: rgba(11, 61, 82, 0.4); 
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glass-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(11, 61, 82, 0.6);
+            border-color: rgba(61, 220, 132, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(61, 220, 132, 0.2);
+        }
+
+        /* Tech Pill Dark - Keep Mulish for readability */
+        .tech-pill {
+            background-color: rgba(61, 220, 132, 0.1);
+            color: #3DDC84;
+            font-family: 'Mulish', sans-serif; 
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 0.4rem 1.2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(61, 220, 132, 0.2);
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .tech-pill:hover {
+            background-color: rgba(61, 220, 132, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Infinite Scroll Animation Utilities */
+        .animate-scroll:hover {
+            animation-play-state: paused;
+        }
+
+        /* --- NAVBAR STYLES --- */
+        #navbar {
+            transition: all 0.4s ease;
+        }
+        
+        /* Active Link State */
+        .nav-link-active {
+            color: #3DDC84 !important;
+            font-weight: 800; /* Extra Bold for active */
+            position: relative;
+        }
+
+        /* Gradient Underline for Active Menu */
+        .nav-link-active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px; /* Position under text */
+            left: 0;
+            width: 100%; /* Full width of text */
+            height: 1.5px; /* Sleek 1.5px height */
+            background: linear-gradient(to right, transparent, #3DDC84, transparent);
+            border-radius: 9999px;
+            box-shadow: 0 2px 10px rgba(61, 220, 132, 0.6); /* Glowing effect */
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; width: 0; left: 50%; }
+            to { opacity: 1; width: 100%; left: 0; }
+        }
+
+        /* Hover State */
+        .nav-link {
+            position: relative;
+            font-weight: 600;
+            font-family: 'Mulish', sans-serif; /* Clean font for menu */
+            letter-spacing: 0.02em;
+        }
+        .nav-link:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(61, 220, 132, 0.4);
+        }
+
+        /* Typing Effect Class */
+        .typewriter-text {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #3DDC84;
+            display: inline-block;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Custom Selection Color */
+        ::selection {
+            background: #3DDC84;
+            color: #073042;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-android-green selection:text-android-navy">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 bg-transparent backdrop-blur-md border-b border-transparent transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 font-bold text-xl tracking-wider flex items-center gap-2" data-aos="fade-down">
+                    <i class="fa-brands fa-android text-3xl text-android-green logo-icon transition-colors duration-300"></i>
+                    <span class="text-white logo-text transition-colors duration-300 font-heading font-bold tracking-tighter text-2xl">MSZ</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <div class="flex items-center space-x-8" data-aos="fade-down" data-aos-delay="100">
+                        <a href="#home" class="nav-link text-sm text-gray-300 transition duration-200">Home</a>
+                        <a href="#skills" class="nav-link text-sm text-gray-300 transition duration-200">Skills</a>
+                        <a href="#experience" class="nav-link text-sm text-gray-300 transition duration-200">Experience</a>
+                        <a href="#projects" class="nav-link text-sm text-gray-300 transition duration-200">Projects</a>
+                        <a href="#about-me" class="nav-link text-sm text-gray-300 transition duration-200">About Me</a>
+                    </div>
+                    
+                    <!-- CTA -->
+                    <div class="flex items-center gap-4" data-aos="fade-down" data-aos-delay="200">
+                        <a href="mailto:sabiruzzaman16@gmail.com" class="contact-btn bg-gradient-to-r from-android-green to-teal-500 text-white font-heading font-bold text-sm px-7 py-2.5 rounded-full hover:shadow-[0_0_20px_rgba(61,220,132,0.4)] transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg shadow-green-500/30">
+                            Contact
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="-mr-2 flex md:hidden items-center gap-4">
+                    <button type="button" onclick="toggleMobileMenu()" class="mobile-menu-btn inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-android-green focus:outline-none transition-colors duration-300">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-[#020617]/95 backdrop-blur-xl border-b border-white/10 absolute w-full left-0 top-20 shadow-2xl transition-colors duration-300" id="mobile-menu">
+            <div class="px-4 pt-4 pb-6 space-y-2">
+                <a href="#home" onclick="toggleMobileMenu()" class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-sans font-semibold text-gray-200 hover:bg-white/5 hover:text-android-green">Home</a>
+                <a href="#skills" onclick="toggleMobileMenu()" class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-sans font-semibold text-gray-200 hover:bg-white/5 hover:text-android-green">Technical Skills</a>
+                <a href="#experience" onclick="toggleMobileMenu()" class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-sans font-semibold text-gray-200 hover:bg-white/5 hover:text-android-green">Experience</a>
+                <a href="#projects" onclick="toggleMobileMenu()" class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-sans font-semibold text-gray-200 hover:bg-white/5 hover:text-android-green">Projects</a>
+                <a href="#about-me" onclick="toggleMobileMenu()" class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-sans font-semibold text-gray-200 hover:bg-white/5 hover:text-android-green">About Me</a>
+                <a href="mailto:sabiruzzaman16@gmail.com" class="block mt-4 text-center py-3 rounded-lg bg-gradient-to-r from-android-green to-teal-500 text-white font-bold font-heading shadow-md">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-32 pb-20 relative overflow-hidden bg-transparent">
+        <!-- Background Elements -->
+        <div class="absolute top-20 right-0 w-96 h-96 bg-android-green/5 rounded-full blur-[100px] -z-10 animate-pulse"></div>
+        <div class="absolute bottom-20 left-0 w-80 h-80 bg-android-blue/5 rounded-full blur-[100px] -z-10 animate-pulse" style="animation-delay: 2s;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse md:flex-row items-center gap-12 lg:gap-24">
+            <div class="w-full md:w-1/2 text-center md:text-left">
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <div class="inline-block px-4 py-2 mb-6 text-xs font-bold tracking-widest text-android-green uppercase bg-android-green/10 rounded-lg border border-android-green/20">
+                        <div class="animate-typewriter typewriter-text">Mobile Application Developer</div>
+                    </div>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-heading font-bold text-white mb-6 leading-tight tracking-tight" data-aos="fade-up" data-aos-delay="200">
+                    Hello, I'm <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-android-green via-teal-200 to-teal-500">Sabiruzzaman</span>
+                </h1>
+                
+                <p class="text-slate-300 text-lg mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed font-light" data-aos="fade-up" data-aos-delay="400">
+                    5+ years of experience crafting high-performance Android & Flutter applications. I build seamless mobile experiences that solve real-world problems with elegance.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start" data-aos="fade-up" data-aos-delay="600">
+                    <a href="mailto:sabiruzzaman16@gmail.com" class="px-8 py-4 bg-gradient-to-r from-android-green to-teal-500 text-white font-heading font-bold rounded-lg hover:scale-105 transition duration-300 shadow-lg shadow-green-500/20">
+                        Get in Touch
+                    </a>
+                    <a href="#projects" class="px-8 py-4 border border-slate-600 text-white hover:border-android-green hover:text-android-green rounded-lg transition duration-300 font-bold font-heading">
+                        View Portfolio
+                    </a>
+                </div>
+                
+                <div class="mt-10 flex items-center justify-center md:justify-start gap-8 text-2xl text-slate-400" data-aos="fade-up" data-aos-delay="800">
+                    <a href="https://github.com/sabiruzzaman" target="_blank" class="hover:text-white hover:-translate-y-1 transition duration-300"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://linkedin.com/in/md-sabiruzzaman" target="_blank" class="hover:text-[#0A66C2] hover:-translate-y-1 transition duration-300"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="mailto:sabiruzzaman16@gmail.com" class="hover:text-red-400 hover:-translate-y-1 transition duration-300"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+            
+            <div class="w-full md:w-1/2 flex justify-center relative group" data-aos="fade-left" data-aos-duration="1200">
+                <div class="relative w-72 h-72 md:w-96 md:h-96 animate-float">
+                    <!-- Image Effects -->
+                    <div class="absolute -inset-1 bg-gradient-to-tr from-android-green to-blue-500 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-1000 animate-spin-slow"></div>
+                    <div class="relative w-full h-full rounded-full overflow-hidden border border-white/10 bg-gradient-to-br from-[#121212] to-[#073042] flex items-center justify-center shadow-2xl">
+                         <i class="fa-solid fa-user-astronaut text-8xl md:text-9xl text-slate-600/50"></i>
+                    </div>
+                    
+                    <!-- Floating Badge -->
+                    <div class="absolute bottom-6 -right-10 bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20 shadow-xl animate-bounce" style="animation-duration: 4s;">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-android-green flex items-center justify-center text-android-navy shadow-lg">
+                                <i class="fa-brands fa-android text-2xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider font-heading">Expert in</p>
+                                <p class="text-sm font-bold text-white font-heading">Android Dev</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 bg-transparent relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4">Technical <span class="text-android-green">Skills</span></h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-transparent via-android-green to-transparent mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Languages -->
+                <div class="glass-card p-8 rounded-xl" data-aos="fade-up" data-aos-delay="0">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-xl">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-white">Languages</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-pill">Java</span>
+                        <span class="tech-pill">Kotlin</span>
+                        <span class="tech-pill">Dart</span>
+                    </div>
+                </div>
+
+                <!-- Frameworks -->
+                <div class="glass-card p-8 rounded-xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-android-green text-xl">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-white">Frameworks</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-pill">Android Native</span>
+                        <span class="tech-pill">Flutter</span>
+                        <span class="tech-pill">Compose</span>
+                    </div>
+                </div>
+
+                <!-- Architecture -->
+                <div class="glass-card p-8 rounded-xl" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-xl">
+                            <i class="fa-solid fa-sitemap"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-white">Architecture</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-pill">MVVM</span>
+                        <span class="tech-pill">Clean Arch</span>
+                        <span class="tech-pill">Bloc/GetX</span>
+                    </div>
+                </div>
+
+                <!-- Tools & Others -->
+                <div class="glass-card p-8 rounded-xl" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400 text-xl">
+                            <i class="fa-solid fa-toolbox"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-white">Tools</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-pill">Firebase</span>
+                        <span class="tech-pill">Git</span>
+                        <span class="tech-pill">CI/CD</span>
+                        <span class="tech-pill">Maps API</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 bg-transparent">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4">Professional <span class="text-android-green">Journey</span></h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-transparent via-android-green to-transparent mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Timeline Container -->
+            <div class="relative">
+                <!-- Vertical Line - Using Margin for Centering (Fix) -->
+                <div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] -ml-[1px] bg-gradient-to-b from-transparent via-slate-700 to-transparent"></div>
+
+                <!-- Item 1 (Left) -->
+                <div class="relative flex flex-col md:flex-row items-center justify-between mb-16 group">
+                    <!-- Dot - Using Margin for Centering (Fix) -->
+                    <div class="absolute left-8 md:left-1/2 w-8 h-8 -ml-4 rounded-full bg-android-green border-4 border-[#020617] flex items-center justify-center z-10 shadow-[0_0_15px_rgba(61,220,132,0.8)]" data-aos="zoom-in"></div>
+                    
+                    <div class="w-full pl-24 md:pl-0 md:w-5/12 md:mr-auto" data-aos="fade-right">
+                        <div class="glass-card p-8 rounded-xl border-l-2 border-android-green relative hover:bg-white/5 transition-colors group-hover:border-l-4">
+                            <span class="inline-block md:absolute md:top-6 md:right-6 text-[10px] font-bold tracking-widest text-android-green bg-green-900/20 px-3 py-1 rounded-full mb-3 md:mb-0 uppercase font-heading">Present</span>
+                            <h3 class="font-heading font-bold text-xl text-white">Software Engineer</h3>
+                            <p class="text-slate-400 text-sm mb-3 font-semibold tracking-wide">Syftet Limited, Dhaka</p>
+                            <p class="text-slate-300 text-sm leading-relaxed font-light">Developing a social chatting Android application. Enhancing legacy code, optimizing performance, and delivering new features.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 (Right) -->
+                <div class="relative flex flex-col md:flex-row items-center justify-between mb-16 group">
+                     <!-- Dot - Using Margin for Centering (Fix) -->
+                     <div class="absolute left-8 md:left-1/2 w-4 h-4 -ml-2 rounded-full bg-slate-600 border-2 border-[#020617] z-10" data-aos="zoom-in"></div>
+                    <div class="w-full pl-24 md:pl-0 md:w-5/12 md:ml-auto" data-aos="fade-left">
+                        <div class="glass-card p-8 rounded-xl border-r-2 border-slate-600 relative hover:bg-white/5 transition-colors md:text-left group-hover:border-android-green">
+                            <span class="inline-block md:absolute md:top-6 md:right-6 text-[10px] font-bold tracking-widest text-slate-400 bg-slate-800/50 px-3 py-1 rounded-full mb-3 md:mb-0 uppercase font-heading">2021 - 2025</span>
+                            <h3 class="font-heading font-bold text-xl text-white">Mobile App Developer</h3>
+                            <p class="text-slate-400 text-sm mb-3 font-semibold tracking-wide">Syntech Solution Ltd, Dhaka</p>
+                            <p class="text-slate-300 text-sm leading-relaxed font-light">Led the mobile team. Built e-gov projects like Agriculture Marketing & Social Welfare Service Portal.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 (Left) -->
+                <div class="relative flex flex-col md:flex-row items-center justify-between mb-16 group">
+                     <!-- Dot - Using Margin for Centering (Fix) -->
+                     <div class="absolute left-8 md:left-1/2 w-4 h-4 -ml-2 rounded-full bg-slate-600 border-2 border-[#020617] z-10" data-aos="zoom-in"></div>
+                    <div class="w-full pl-24 md:pl-0 md:w-5/12 md:mr-auto" data-aos="fade-right">
+                        <div class="glass-card p-8 rounded-xl border-l-2 border-slate-600 relative hover:bg-white/5 transition-colors group-hover:border-android-green">
+                            <span class="inline-block md:absolute md:top-6 md:right-6 text-[10px] font-bold tracking-widest text-slate-400 bg-slate-800/50 px-3 py-1 rounded-full mb-3 md:mb-0 uppercase font-heading">2021</span>
+                            <h3 class="font-heading font-bold text-xl text-white">Android App Developer</h3>
+                            <p class="text-slate-400 text-sm mb-3 font-semibold tracking-wide">Alesha Tech Ltd, Dhaka</p>
+                            <p class="text-slate-300 text-sm leading-relaxed font-light">Worked on Alesha Ride Sharing & Delivery App and Saifur's LMS. Integrated complex APIs.</p>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Item 4 (Right) -->
+                 <div class="relative flex flex-col md:flex-row items-center justify-between mb-16 group">
+                     <!-- Dot - Using Margin for Centering (Fix) -->
+                     <div class="absolute left-8 md:left-1/2 w-4 h-4 -ml-2 rounded-full bg-slate-600 border-2 border-[#020617] z-10" data-aos="zoom-in"></div>
+                    <div class="w-full pl-24 md:pl-0 md:w-5/12 md:ml-auto" data-aos="fade-left">
+                        <div class="glass-card p-8 rounded-xl border-r-2 border-slate-600 relative hover:bg-white/5 transition-colors md:text-left group-hover:border-android-green">
+                            <span class="inline-block md:absolute md:top-6 md:right-6 text-[10px] font-bold tracking-widest text-slate-400 bg-slate-800/50 px-3 py-1 rounded-full mb-3 md:mb-0 uppercase font-heading">2020 - 2021</span>
+                            <h3 class="font-heading font-bold text-xl text-white">Android App Developer</h3>
+                            <p class="text-slate-400 text-sm mb-3 font-semibold tracking-wide">Coder71 Ltd, Dhaka</p>
+                            <p class="text-slate-300 text-sm leading-relaxed font-light">Developed and deployed apps across full lifecycle. Launched official app on Google Play Store.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section (Infinite Scroll) -->
+    <section id="projects" class="py-24 bg-transparent relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4">Featured <span class="text-android-green">Projects</span></h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-transparent via-android-green to-transparent mx-auto rounded-full"></div>
+            </div>
+        
+            <!-- Infinite Scroll Container -->
+            <div class="w-full overflow-hidden py-10" data-aos="fade-up" data-aos-delay="200">
+                <div class="flex gap-8 animate-scroll w-max hover:pause">
+                    
+                    <!-- Card Template -->
+                    <a href="#" target="_blank" class="min-w-[350px] md:w-[400px] snap-center glass-card p-8 rounded-xl flex-shrink-0 flex flex-col group cursor-pointer block transform hover:-translate-y-2 transition-all duration-300">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-14 h-14 rounded-full bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-android-green text-2xl group-hover:scale-110 transition-transform shadow-lg shadow-teal-500/10">
+                                <i class="fa-solid fa-basket-shopping"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-heading font-bold text-2xl text-white group-hover:text-android-green transition-colors">Bazar Monitoring</h3>
+                                <div class="text-[10px] uppercase tracking-widest text-slate-400 mt-1 flex items-center gap-1 font-bold font-heading">
+                                    Live Demo <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed line-clamp-3 font-light">An e-government project for the Agriculture Marketing Department to monitor market prices and trends.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="tech-pill">Android</span>
+                            <span class="tech-pill">Java</span>
+                            <span class="tech-pill">GovTech</span>
+                        </div>
+                    </a>
+
+                    <!-- Project 2 -->
+                    <a href="#" target="_blank" class="min-w-[350px] md:w-[400px] snap-center glass-card p-8 rounded-xl flex-shrink-0 flex flex-col group cursor-pointer block transform hover:-translate-y-2 transition-all duration-300">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-14 h-14 rounded-full bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-android-green text-2xl group-hover:scale-110 transition-transform shadow-lg shadow-teal-500/10">
+                                <i class="fa-solid fa-hands-holding-child"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-heading font-bold text-2xl text-white group-hover:text-android-green transition-colors">Social Welfare</h3>
+                               <div class="text-[10px] uppercase tracking-widest text-slate-400 mt-1 flex items-center gap-1 font-bold font-heading">
+                                    Live Demo <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed line-clamp-3 font-light">Digital platform for the Ministry of Commerce facilitating social welfare services access.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="tech-pill">Flutter</span>
+                            <span class="tech-pill">API</span>
+                        </div>
+                    </a>
+
+                    <!-- Project 3 -->
+                    <a href="#" target="_blank" class="min-w-[350px] md:w-[400px] snap-center glass-card p-8 rounded-xl flex-shrink-0 flex flex-col group cursor-pointer block transform hover:-translate-y-2 transition-all duration-300">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-14 h-14 rounded-full bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-android-green text-2xl group-hover:scale-110 transition-transform shadow-lg shadow-teal-500/10">
+                                <i class="fa-solid fa-motorcycle"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-heading font-bold text-2xl text-white group-hover:text-android-green transition-colors">Ride Sharing</h3>
+                             <div class="text-[10px] uppercase tracking-widest text-slate-400 mt-1 flex items-center gap-1 font-bold font-heading">
+                                    Live Demo <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed line-clamp-3 font-light">A ride-sharing and delivery application with real-time tracking and payment gateway integration.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="tech-pill">Google Maps</span>
+                            <span class="tech-pill">Real-time</span>
+                        </div>
+                    </a>
+                    
+                    <!-- DUPLICATES FOR LOOP -->
+                     <a href="#" target="_blank" class="min-w-[350px] md:w-[400px] snap-center glass-card p-8 rounded-xl flex-shrink-0 flex flex-col group cursor-pointer block transform hover:-translate-y-2 transition-all duration-300">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-14 h-14 rounded-full bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-android-green text-2xl group-hover:scale-110 transition-transform shadow-lg shadow-teal-500/10">
+                                <i class="fa-solid fa-basket-shopping"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-heading font-bold text-2xl text-white group-hover:text-android-green transition-colors">Bazar Monitoring</h3>
+                                <div class="text-[10px] uppercase tracking-widest text-slate-400 mt-1 flex items-center gap-1 font-bold font-heading">
+                                    Live Demo <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed line-clamp-3 font-light">An e-government project for the Agriculture Marketing Department to monitor market prices and trends.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="tech-pill">Android</span>
+                            <span class="tech-pill">Java</span>
+                            <span class="tech-pill">GovTech</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW About Me Section -->
+    <section id="about-me" class="py-24 bg-transparent relative overflow-hidden">
+        <!-- Background decorative blur -->
+        <div class="absolute -right-20 top-20 w-96 h-96 bg-android-green/5 rounded-full blur-[100px] animate-pulse"></div>
+        
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-3 mb-12" data-aos="fade-right">
+                <i class="fa-regular fa-user text-android-green text-2xl"></i>
+                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white">About <span class="text-android-green">Me</span></h2>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center gap-16">
+                <!-- Left: Text Content -->
+                <div class="w-full md:w-2/3" data-aos="fade-up" data-aos-delay="200">
+                    <p class="text-slate-300 text-lg leading-8 mb-6 font-light">
+                        I'm <strong class="text-white font-heading text-xl">Md. Sabiruzzaman</strong>, a passionate <span class="text-android-green font-semibold">Mobile App Developer</span> based in Dhaka. I specialize in building robust, high-performance applications using Android Native and Flutter.
+                    </p>
+                    <p class="text-slate-300 text-lg leading-8 mb-8 font-light">
+                        My approach combines technical expertise with a keen eye for design, ensuring every app I build is not only functional but also intuitive and engaging. I am constantly learning and adapting to new technologies to deliver the best solutions.
+                    </p>
+                    
+                    <div class="mt-8 p-6 rounded-2xl bg-white/5 border border-white/5">
+                        <h3 class="text-white font-heading font-bold text-lg mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-bolt text-android-green"></i> Core Tech Stack
+                        </h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 border border-slate-600 rounded-lg text-sm text-slate-300 hover:border-android-green hover:text-android-green transition cursor-default">Java / Kotlin</span>
+                            <span class="px-4 py-2 border border-slate-600 rounded-lg text-sm text-slate-300 hover:border-android-green hover:text-android-green transition cursor-default">Dart / Flutter</span>
+                            <span class="px-4 py-2 border border-slate-600 rounded-lg text-sm text-slate-300 hover:border-android-green hover:text-android-green transition cursor-default">Jetpack Compose</span>
+                            <span class="px-4 py-2 border border-slate-600 rounded-lg text-sm text-slate-300 hover:border-android-green hover:text-android-green transition cursor-default">Clean Architecture</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Profile Image -->
+                <div class="w-full md:w-1/3 flex justify-center" data-aos="fade-left" data-aos-delay="400">
+                    <div class="relative w-72 h-72">
+                        <div class="absolute inset-0 bg-android-green rounded-full opacity-10 blur-2xl animate-pulse"></div>
+                        <div class="relative w-full h-full rounded-full overflow-hidden border-2 border-white/10 bg-[#121212] flex items-center justify-center shadow-2xl group">
+                            <!-- Placeholder for Profile Image -->
+                             <i class="fa-solid fa-code text-9xl text-slate-700 group-hover:text-android-green transition duration-500 transform group-hover:scale-110"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black/20 backdrop-blur-md border-t border-slate-800/50 py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+             <h3 class="text-3xl font-heading font-bold text-white mb-6" data-aos="fade-up">Let's build something <span class="text-android-green">amazing</span> together!</h3>
+             
+             <div class="flex justify-center gap-6 mb-8" data-aos="fade-up" data-aos-delay="100">
+                <a href="mailto:sabiruzzaman16@gmail.com" class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-android-green hover:text-android-navy transition duration-300 text-lg hover:-translate-y-1">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+                <a href="https://linkedin.com/in/md-sabiruzzaman" target="_blank" class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-[#0077B5] hover:text-white transition duration-300 text-lg hover:-translate-y-1">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/sabiruzzaman" target="_blank" class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-black hover:text-white transition duration-300 text-lg hover:-translate-y-1">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+             </div>
+             
+            <p class="text-slate-500 text-sm font-light tracking-wide">© 2025 Md. Sabiruzzaman. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- AOS JS Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: true, // Animation happens only once
+            offset: 100, // Offset (in px) from the original trigger point
+            duration: 800, // Duration of animation
+            easing: 'ease-out-cubic',
+        });
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        }
+
+        // --- SCROLL SPY LOGIC ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            if (scrollY < 100) {
+                current = 'home';
+            }
+
+            navLinks.forEach(link => {
+                link.classList.remove('nav-link-active');
+                link.classList.add('text-gray-300');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.remove('text-gray-300');
+                    link.classList.add('nav-link-active');
+                }
+            });
+        });
+        
+        window.dispatchEvent(new Event('scroll'));
+    </script>
+</body>
+</html>
