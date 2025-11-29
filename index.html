@@ -65,6 +65,11 @@
     </script>
     <style>
         /* Base styles */
+        html {
+            /* Fix for macOS overscroll white background */
+            background-color: #073042;
+        }
+
         body {
             font-family: 'Mulish', sans-serif;
             transition: color 0.3s ease;
@@ -352,6 +357,7 @@
                         <h3 class="font-heading font-bold text-xl text-white">Architecture</h3>
                     </div>
                     <div class="flex flex-wrap gap-2">
+                          <span class="tech-pill">MVP</span>
                         <span class="tech-pill">MVVM</span>
                         <span class="tech-pill">Clean Arch</span>
                         <span class="tech-pill">Bloc/GetX</span>
@@ -587,9 +593,12 @@
                     <div class="relative w-72 h-72">
                         <div class="absolute inset-0 bg-android-green rounded-full opacity-10 blur-2xl animate-pulse"></div>
                         <div class="relative w-full h-full rounded-full overflow-hidden border-2 border-white/10 bg-[#121212] flex items-center justify-center shadow-2xl group">
-                            <!-- Placeholder for Profile Image -->
-                             <i class="fa-solid fa-code text-9xl text-slate-700 group-hover:text-android-green transition duration-500 transform group-hover:scale-110"></i>
-                        </div>
+                            <!-- Profile Image -->
+                                <img 
+        src="https://raw.githubusercontent.com/sabiruzzaman/personal_website/main/sabiruzzaman.jpeg" 
+        alt="Md. Sabiruzzaman" 
+        class="w-full h-full object-cover rounded-full"
+    ></div>
                     </div>
                 </div>
             </div>
