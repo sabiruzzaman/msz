@@ -82,6 +82,8 @@
             background-color: #073042;
             overflow-x: hidden;
             width: 100%;
+            /* Fix for macOS bounce/overscroll effect */
+            overscroll-behavior: none;
         }
 
         body {
@@ -95,6 +97,8 @@
             overflow-x: hidden;
             width: 100%;
             position: relative;
+            /* Ensure body also prevents overscroll bounce */
+            overscroll-behavior: none;
         }
         
         /* Tech Grid Background */
